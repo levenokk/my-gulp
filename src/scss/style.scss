@@ -1,0 +1,39 @@
+@import "libs";
+@import "fonts";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+}
+
+body{
+  line-height: 1.75;
+}
+
+@each $i in h1, h2, h3, h4, h5, h6 {
+  #{$i} {
+    line-height: 1.2;
+  }
+}
+
+a {
+  color: inherit;
+  display: inline-block;
+  display: none;
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+}
