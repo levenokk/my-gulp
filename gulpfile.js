@@ -9,7 +9,7 @@ const contact = require("gulp-concat")
 const uglify = require("gulp-uglify")
 const gcmq = require("gulp-group-css-media-queries")
 const imagemin = require("gulp-imagemin")
-const zip = require('gulp-zip')
+const zip = require("gulp-zip")
 
 const dist = "./dist/"
 const src = "./src/"
@@ -17,8 +17,9 @@ const src = "./src/"
 gulp.task("browser-sync", function () {
   browserSync.init({
     server: {
-      baseDir: "./dist"
-    }
+      baseDir: dist
+    },
+    notify: false
   })
 })
 
@@ -72,7 +73,7 @@ gulp.task("html", function () {
 gulp.task("img", function () {
   return gulp.src(src + "img/**/*.{png,jpg,svg,gif,ico,webp}")
     .pipe(imagemin())
-    .pipe(gulp.dest(dist + 'img'))
+    .pipe(gulp.dest(dist + "img"))
     .pipe(browserSync.reload({ stream: true }))
 })
 
@@ -83,13 +84,13 @@ gulp.task("fonts", function () {
 
 gulp.task("build", function () {
   return gulp.src(dist + "**")
-    .pipe(zip('project.zip'))
-    .pipe(gulp.dest('./'))
+    .pipe(zip("project.zip"))
+    .pipe(gulp.dest("./"))
 })
 
 gulp.task("watch", function () {
   gulp.watch(src + "scss/style.scss", gulp.parallel("scss"))
-  gulp.watch(dist + "css/*.css").on('change', browserSync.reload);
+  gulp.watch(dist + "css/*.css").on("change", browserSync.reload);
   gulp.watch(src + "js/main.js", gulp.parallel("js"))
   gulp.watch(src + "**/*.html", gulp.parallel("html"))
   gulp.watch(src + "img/**/*.{png,jpg,svg,gif,ico,webp}", gulp.parallel("img"))
